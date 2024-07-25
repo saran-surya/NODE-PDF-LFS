@@ -1,9 +1,19 @@
 {
-  "name": "node-parser",
-  "version": "1.0.0",
-  "description": "A NODE JS based HTML to PDF converter with the help of PUPPETEER and CPP for large HTML's",
+  "name": "node-pdf-lfs",
+  "version": "0.0.1",
+  "description": "Helps with LFS support of converting HTML to PDF with the help of Puppeteer",
   "main": "src/index.js",
   "type" : "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saran-surya/NODE-PDF-LFS.git"
+  },
+  "keywords": [
+    "LFS",
+    "HTML-PDF",
+    "verification",
+    "email"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
