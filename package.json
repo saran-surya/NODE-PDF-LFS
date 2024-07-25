@@ -1,0 +1,16 @@
+{
+  "name": "node-parser",
+  "version": "1.0.0",
+  "description": "A NODE JS based HTML to PDF converter with the help of PUPPETEER and CPP for large HTML's",
+  "main": "src/index.js",
+  "type" : "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "surya",
+  "license": "MIT",
+  "dependencies": {
+    "pdf-merger-js": "^5.1.2",
+    "puppeteer": "^22.14.0"
+  }
+}
