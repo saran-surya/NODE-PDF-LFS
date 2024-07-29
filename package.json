@@ -1,9 +1,9 @@
 {
   "name": "node-pdf-lfs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Helps with LFS support of converting HTML to PDF with the help of Puppeteer",
   "main": "src/index.js",
-  "type" : "module",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/saran-surya/NODE-PDF-LFS.git"
@@ -11,8 +11,7 @@
   "keywords": [
     "LFS",
     "HTML-PDF",
-    "verification",
-    "email"
+    "PDF-LFS-SUPPORT"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -20,7 +19,7 @@
   "author": "surya",
   "license": "MIT",
   "dependencies": {
-    "pdf-merger-js": "^5.1.2",
+    "@condorhero/merge-pdfs": "^0.0.7",
     "puppeteer": "^22.14.0"
   }
 }
