@@ -73,7 +73,7 @@ for (const args of process.argv.slice(2)) {
             validateDirPath(RESULT_ROOT)
             break
 
-        case "--template":
+        case "--template-file":
             console.debug("Template file", buffer[1])
             TEMPLATE_FILE = (existsSync(buffer[1].replace(/\\/g, "/"))) ? buffer[1].replace(/\\/g, "/") : TEMPLATE_FILE
             break

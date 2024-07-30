@@ -131,4 +131,6 @@ dist
 
 result/*
 temp/*
-# assets/*
+assets/bench-mark.html
+assets/*.png 
+assets/*.css
