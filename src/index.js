@@ -3,7 +3,6 @@ import { join } from 'path';
 import { createInterface } from 'readline';
 import { launch } from "puppeteer";
 import { execSync } from 'child_process';
-import { exit } from 'process';
 console.time()
 
 
@@ -35,7 +34,7 @@ function validateDirPath(sysPath){
 }
 
 //override debug log
-if(!(process.argv.indexOf("--verbose"))){
+if(process.argv.indexOf("--verbose") < 0){
     // disable logging debug
     console.debug = function () { }
 }
@@ -67,29 +66,38 @@ for (const args of process.argv.slice(2)) {
             TEMP_ROOT = buffer[1].replace(/\\/g, "/")
             validateDirPath(TEMP_ROOT)
             break
+        
+        case "--result-root":
+            console.debug("RESULT ROOT", buffer[1])
+            RESULT_ROOT = buffer[1].replace(/\\/g, "/")
+            validateDirPath(RESULT_ROOT)
+            break
 
         case "--template":
             console.debug("Template file", buffer[1])
             TEMPLATE_FILE = (existsSync(buffer[1].replace(/\\/g, "/"))) ? buffer[1].replace(/\\/g, "/") : TEMPLATE_FILE
             break
 
-        case "--min-buffer":
+        case "--min-page-buffer":
             console.debug("MIN PAGE BUFFER", buffer[1])
             MIN_PAGE_BUFFER = (Number.isInteger(Number.parseInt(buffer[1]))) ? Number.parseInt(buffer[1]) : MIN_PAGE_BUFFER
-            console.log(MIN_PAGE_BUFFER)
     }
 }
 
 // OVERVIEW
+console.log("OPTION OVERVIEW")
 console.table({
     TEMPLATE_FILE : TEMPLATE_FILE,
     RESULT_ROOT : RESULT_ROOT,
     ASSET_ROOT : ASSET_ROOT,
-    TEMP_ROOT : TEMP_ROOT
+    TEMP_ROOT : TEMP_ROOT,
+    MIN_PAGE_BUFFER : MIN_PAGE_BUFFER
 })
 
 
-
+/**
+ * Cleanup all the existing dump from previous generation
+ */
 async function preCleanup() {
     validateDirPath(TEMP_ROOT)
     validateDirPath(RESULT_ROOT)
@@ -234,6 +242,14 @@ async function preProcessFile(TEMPLATE_FILE) {
     fileStream.close()
 }
 
+
+/**
+ * 
+ * @param {String} TEMPLATE_FILE Template HTML file to work with
+ * @param {String} fileOutput Location of the template file after generation (After split)
+ * @param {Number} start Starting line number in {@link TEMPLATE_FILE}
+ * @param {Number} end Ending line number in {@link TEMPLATE_FILE}
+ */
 async function createTree(TEMPLATE_FILE, fileOutput, start, end) {
     var wrt = createWriteStream(fileOutput, {
         flags: 'a'
@@ -266,6 +282,11 @@ async function createTree(TEMPLATE_FILE, fileOutput, start, end) {
 
 }
 
+
+/**
+ * Generates a PDF FILE for the provided HTML File
+ * @param {String} inputFile Location of HTML File
+ */
 async function renderPDF(inputFile) {
 
     let buff = inputFile.split("\\")
@@ -294,6 +315,9 @@ async function renderPDF(inputFile) {
 }
 
 
+/**
+ * MAIN FUNCTION - ENTRY
+ */
 async function main() {
     console.time("INDEXING")
 
@@ -349,8 +373,16 @@ async function main() {
 
 
 
+// MAIN CALL
 main().then(() => {
     console.timeEnd()
+}).catch((err)=>{
+    console.error(err)
+
+    console.log("\n\n---------------------------------------------------------------\n\n")
+    console.log("Execution stopped due to error in main level, Please contact Author")
+    console.log("Or raise an issue / bug in the repository")
+    console.log("https://github.com/saran-surya/NODE-PDF-LFS/issues")
 })
 
 // test
