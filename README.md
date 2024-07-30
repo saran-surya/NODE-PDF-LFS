@@ -16,6 +16,9 @@
    ```
 -  Supports CSS3, No matter how heavy your CSS is, The package handles it for you (Maybe try adjusting the variable ```--min-page-buffer``` if it's too heavy
 
+
+
+
 ## Let's Get Started
 ## Installation
 ### NOTE
@@ -40,5 +43,23 @@ npm i node-pdf-lfs
 | --verbose | DEBUG_FLAG | Displays all ```console.debug()``` logs for debugging purposes of indexing |
 
 ## Example
-```node . --verbose --result-root="" --assset-root="" --temp-root="" --template-file="" --min-page-buffer=50```
+Sample execution call with all parameters
+```shell
+node . --verbose --result-root="" --assset-root="" --temp-root="" --template-file="" --min-page-buffer=50
+```
+
+
+<hr/>
+
+
+# Bench Marks
+![image](https://github.com/user-attachments/assets/cf279195-04a4-48a6-8a85-a741363fa638)![image](https://github.com/user-attachments/assets/61f84853-e34e-4675-aa9c-d057c642af99)
+
+
+
+<hr/>
+
+## If you like the project a ⭐ to the REPO would mean a lot. ❤
+
+
 
