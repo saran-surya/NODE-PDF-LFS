@@ -5,6 +5,9 @@ import { launch } from "puppeteer";
 import { execSync } from 'child_process';
 console.time()
 
+// console.log(process.argv)
+
+const NODE_EXECUTABLE = process.argv[0]
 
 
 // GLOBAL PATH DECLARATION
@@ -126,7 +129,7 @@ function mergePdf(file1, file2) {
             file1 = file1.replace(/\\/g, "/")
             file2 = file2.replace(/\\/g, "/")
 
-            const command = `node ${process.cwd()}\\node_modules\\@condorhero\\merge-pdfs\\bin\\merge-pdfs.mjs ${file1} ${file2} -o ${file1}`
+            const command = `"${NODE_EXECUTABLE}" "${process.cwd()}\\node_modules\\@condorhero\\merge-pdfs\\bin\\merge-pdfs.mjs" "${file1}" "${file2}" -o "${file1}"`
             console.debug(command)
 
             const child = execSync(command)

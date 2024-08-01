@@ -21,5 +21,9 @@
   "dependencies": {
     "@condorhero/merge-pdfs": "^0.0.7",
     "puppeteer": "^22.14.0"
-  }
+  },
+  "bundledDependencies": [
+    "@condorhero/merge-pdfs",
+    "puppeteer"
+  ]
 }
