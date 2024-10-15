@@ -7,6 +7,7 @@ console.time()
 
 // console.log(process.argv)
 
+// Add the node.exr path and proceed with the changes
 const NODE_EXECUTABLE = process.argv[0]
 
 
@@ -353,7 +354,6 @@ async function main() {
             "end": pages[end].end
         }
 
-        // console.log(pageBuffers[pageBuffCount])
         await createTree(TEMPLATE_FILE, `${process.cwd()}\\temp\\temp-${pageBuffCount}.html`, pages[start].start, pages[end].end)
         await renderPDF(`${process.cwd()}\\temp\\temp-${pageBuffCount}.html`)
 
@@ -370,8 +370,6 @@ async function main() {
     console.time("PDF MERGE")
     await prepForMerge()
     console.timeLog("PDF MERGE")
-
-    // console.log(pageBuffCount)
 }
 
 
@@ -388,7 +386,3 @@ main().then(() => {
     console.log("https://github.com/saran-surya/NODE-PDF-LFS/issues")
 })
 
-// test
-// mergePdf("D:/NODE-PDF-LFS/result/temp-1.pdf", "D:/NODE-PDF-LFS/result/temp-2.pdf").catch((err)=>{
-//     console.log(err)
-// })
