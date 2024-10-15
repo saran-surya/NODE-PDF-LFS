@@ -31,10 +31,16 @@ let TEMPLATE_FILE = `${ASSET_ROOT}/template.html`
 
 
 // Check if the provided directories exist / Or proceed to create
+/**
+ * 
+ * @param {Array<String>} sysPath 
+ */
 function validateDirPath(sysPath){
-    if(!(existsSync(sysPath))){
-        mkdirSync(sysPath)
-    }
+    sysPath.forEach((provPath)=>{
+        if(!(existsSync(provPath))){
+            mkdirSync(provPath)
+        }
+    })
 }
 
 //override debug log
@@ -68,13 +74,13 @@ for (const args of process.argv.slice(2)) {
         case "--temp-root":
             console.debug("TEMP ROOT", buffer[1])
             TEMP_ROOT = buffer[1].replace(/\\/g, "/")
-            validateDirPath(TEMP_ROOT)
+            validateDirPath([TEMP_ROOT])
             break
         
         case "--result-root":
             console.debug("RESULT ROOT", buffer[1])
             RESULT_ROOT = buffer[1].replace(/\\/g, "/")
-            validateDirPath(RESULT_ROOT)
+            validateDirPath([RESULT_ROOT])
             break
 
         case "--template-file":
@@ -103,8 +109,7 @@ console.table({
  * Cleanup all the existing dump from previous generation
  */
 async function preCleanup() {
-    validateDirPath(TEMP_ROOT)
-    validateDirPath(RESULT_ROOT)
+    validateDirPath([TEMP_ROOT, RESULT_ROOT])
 
     const directories = [TEMP_ROOT, RESULT_ROOT];
     for (const directory of directories) {
